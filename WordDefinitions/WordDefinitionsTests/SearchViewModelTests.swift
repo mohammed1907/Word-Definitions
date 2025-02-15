@@ -53,8 +53,8 @@ class SearchViewModelTests: XCTestCase {
         viewModel.searchWord("hello")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            XCTAssertEqual(self.viewModel.apiResults.count, 2)
-            XCTAssertEqual(self.viewModel.apiResults.first?.word, "hello")
+            XCTAssertEqual(self.viewModel.filteredResponse.count, 2)
+            XCTAssertEqual(self.viewModel.filteredResponse.first?.word, "hello")
             expectation.fulfill()
         }
         
@@ -90,8 +90,8 @@ class SearchViewModelTests: XCTestCase {
         viewModel.searchWord("hello")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            XCTAssertEqual(self.viewModel.apiResults.count, 1)
-            XCTAssertEqual(self.viewModel.apiResults.first?.word, "hello")
+            XCTAssertEqual(self.viewModel.filteredResponse.count, 1)
+            XCTAssertEqual(self.viewModel.filteredResponse.first?.word, "hello")
             expectation.fulfill()
         }
         

@@ -10,14 +10,14 @@ import Combine
 class SearchViewModel: ObservableObject {
     private let dictionaryService: DictionaryServiceProtocol
     private let cacheManager: CoreDataManager
-
+    
     @Published var searchText: String = ""
     @Published var wordList: [DictionaryWord] = []
-    @Published var apiResults: [DictionaryWord] = []
+    @Published var filteredResponse: [DictionaryWord] = []
     @Published var errorMessage: String?
-
+    
     private var cancellable = Set<AnyCancellable>()
-   
+    
     init(dictionaryService: DictionaryServiceProtocol = DictionaryService(),
          cacheManager: CoreDataManager = CoreDataManager.shared) {
         self.dictionaryService = dictionaryService
@@ -29,20 +29,20 @@ class SearchViewModel: ObservableObject {
             .removeDuplicates()
             .sink { [weak self] searchText in
                 guard let self = self else { return }
-                if searchText.isEmpty {
-                    self.wordList = self.apiResults + self.cacheManager.fetchCachedWords().filter { cachedWord in
-                        !self.apiResults.contains { $0.word == cachedWord.word }
-                    }
-                } else {
-                    self.searchWord(searchText)
+                self.filteredResponse = self.wordList.filter { entry in
+                    searchText.isEmpty ? true : entry.word.lowercased().contains(searchText.lowercased())
                 }
+                self.searchWord(searchText)
+                
             }
             .store(in: &cancellable)
     }
-
+    
     func searchWord(_ word: String) {
         guard !word.isEmpty else { return }
-        
+        if wordList.contains(where: { $0.word.lowercased() == word.lowercased() }) {
+            return
+        }
         dictionaryService.fetchWords(for: word)
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -56,35 +56,36 @@ class SearchViewModel: ObservableObject {
                 }
             }, receiveValue: { definitions in
                 DispatchQueue.main.async {
-                    self.apiResults = definitions.reduce(into: [DictionaryWord]()) { uniqueWords, word in
-                           if !uniqueWords.contains(where: { $0.word == word.word }) {
-                               uniqueWords.append(word)
-                           }
-                       }
-                    self.saveWordsToCache(self.apiResults)
+                    self.filteredResponse = definitions.reduce(into: [DictionaryWord]()) { uniqueWords, word in
+                        if !uniqueWords.contains(where: { $0.word == word.word }) {
+                            uniqueWords.append(word)
+                        }
                     }
+                    self.saveWordsToCache(self.filteredResponse)
+                }
             })
             .store(in: &cancellable)
     }
-
+    
 }
 
-//MARK: cashing logics
+//MARK: caching logics
 extension SearchViewModel {
     func loadCachedWords() {
         let cachedWords = cacheManager.fetchCachedWords()
-        self.wordList = cachedWords
+        self.wordList = cachedWords.reversed()
     }
-
+    
     func isWordCached(word: DictionaryWord) -> Bool {
         return cacheManager.isWordCached(word)
     }
-
+    
     func saveWordsToCache(_ words: [DictionaryWord]) {
-            for word in words {
-                if !isWordCached(word: word) {
-                    cacheManager.saveWord(word)
-                }
+        for word in words {
+            if !isWordCached(word: word) {
+                cacheManager.saveWord(word)
             }
+        }
+        loadCachedWords()
     }
 }

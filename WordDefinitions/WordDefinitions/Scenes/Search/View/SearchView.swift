@@ -13,7 +13,7 @@ struct SearchView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                List(getCurrentWordList(), id: \.word) { word in
+                List( viewModel.filteredResponse, id: \.word) { word in
                     Button(action: {
                         coordinator.showWordDetails(for: word)
                     }) {
@@ -28,20 +28,18 @@ struct SearchView: View {
                 }
             }
             .navigationTitle("Dictionary")
-            .overlay(
-                ToastView(message: viewModel.errorMessage ?? "")
-                    .opacity(viewModel.errorMessage == nil ? 0 : 1)
-            )
+//            .overlay(
+//                ToastView(message: viewModel.errorMessage ?? "")
+//                    .opacity(viewModel.errorMessage == nil ? 0 : 1)
+//            )
         }
         .searchable(text: $viewModel.searchText, prompt: "Search for a word")
         .onSubmit(of: .search) {
             viewModel.searchWord(viewModel.searchText) 
         }
+      
 
     }
 
-    /// **Get the appropriate list based on search state**
-    private func getCurrentWordList() -> [DictionaryWord] {
-        return viewModel.searchText.isEmpty ? viewModel.wordList : viewModel.apiResults
-    }
+  
 }
