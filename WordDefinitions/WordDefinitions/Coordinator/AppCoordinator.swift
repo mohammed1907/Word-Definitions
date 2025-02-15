@@ -18,18 +18,21 @@ class AppCoordinator: Coordinator {
     func start() {
         showSearchScreen()
     }
-    /// **Show Search Screen**
+    
     func showSearchScreen() {
-        let viewModel = DictionaryViewModel()
+        let viewModel = SearchViewModel()
         let searchView = SearchView(viewModel: viewModel, coordinator: self)
         let hostingController = UIHostingController(rootView: searchView)
         navigationController.setViewControllers([], animated: false)
         navigationController.setViewControllers([hostingController], animated: false)
     }
-    /// **Show Word Details Screen**
     func showWordDetails(for wordDefinition: DictionaryWord) {
-        let detailsView = WordDetailsView(wordDefinition: wordDefinition)
+        let viewModel = WordDetailsViewModel(wordDefinition: wordDefinition)
+        let detailsView = WordDetailsView(viewModel: viewModel)
         let hostingController = UIHostingController(rootView: detailsView)
-        navigationController.pushViewController(hostingController, animated: true)
+
+        DispatchQueue.main.async {
+            self.navigationController.pushViewController(hostingController, animated: true)
+        }
     }
 }

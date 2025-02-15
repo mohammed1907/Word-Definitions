@@ -14,7 +14,7 @@ class CoreDataManager {
     private let container: NSPersistentContainer
     private var context: NSManagedObjectContext { container.viewContext }
 
-    private init() {
+     init() {
         container = NSPersistentContainer(name: "DictionaryCache")
         container.loadPersistentStores { _, error in
             if let error = error {
@@ -23,35 +23,57 @@ class CoreDataManager {
         }
     }
 
-    /// **Save a word definition**
-    func saveWord(_ wordDefinition: DictionaryWord) {
-        let entity = CachedWord(context: context)
-        entity.word = wordDefinition.word
-        entity.phonetics = wordDefinition.phonetics?.first?.text ?? ""
-        entity.definition = wordDefinition.meanings?.first?.definitions.first?.definition ?? ""
-        do {
-            try context.save()
-        } catch {
-            print("Failed to save word: \(error.localizedDescription)")
+    func saveWord(_ word: DictionaryWord) {
+            let newWord = CachedWord(context: context)
+            newWord.word = word.word
+
+            // ✅ Save full meanings (part of speech, definitions, examples)
+        if let firstMeaning = word.meanings?.first {
+                newWord.partOfSpeech = firstMeaning.partOfSpeech
+                newWord.definition = firstMeaning.definitions.map { $0.definition }
+                newWord.examples = firstMeaning.definitions.compactMap { $0.example }
+            }
+
+            do {
+                try context.save()
+                print("✅ Saved word: \(word.word)")
+            } catch {
+                print("❌ Error saving word: \(error.localizedDescription)")
+            }
         }
-    }
 
     /// **Fetch cached words**
     func fetchCachedWords() -> [DictionaryWord] {
-        let fetchRequest: NSFetchRequest<CachedWord> = CachedWord.fetchRequest()
+        let request: NSFetchRequest<CachedWord> = CachedWord.fetchRequest()
+
         do {
-            let results = try context.fetch(fetchRequest)
-            return results.map { cachedWord in
+            let cachedEntities = try context.fetch(request)
+            return cachedEntities.map { cachedWord in
                 DictionaryWord(
                     word: cachedWord.word ?? "",
-                    phonetics: [Phonetic(text: cachedWord.phonetics, audio: nil, sourceUrl: nil)],
-                    meanings: [Meaning(partOfSpeech: "N/A", definitions: [Definition(definition: cachedWord.definition ?? "", example: nil, synonyms: nil, antonyms: nil)], synonyms: nil, antonyms: nil)],
+                    phonetics: [],
+                    meanings: [
+                        Meaning(
+                            partOfSpeech: cachedWord.partOfSpeech ?? "",
+                            definitions: (cachedWord.definition ?? []).enumerated().map { index, definition in
+                                Definition(
+                                    definition: definition,
+                                    example: cachedWord.examples?.indices.contains(index) == true ? cachedWord.examples?[index] : nil,
+                                    synonyms: [],
+                                    antonyms: []
+                                )
+                            },
+                            synonyms: [],
+                            antonyms: []
+                        )
+                    ],
                     license: nil,
-                    sourceUrls: nil
+                    sourceUrls: []
+                    
                 )
             }
         } catch {
-            print("Failed to fetch cached words: \(error.localizedDescription)")
+            print("❌ Error fetching cached words: \(error.localizedDescription)")
             return []
         }
     }

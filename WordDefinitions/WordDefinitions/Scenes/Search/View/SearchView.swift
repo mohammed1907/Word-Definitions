@@ -7,31 +7,21 @@
 import SwiftUI
 
 struct SearchView: View {
-    @ObservedObject var viewModel: DictionaryViewModel
+    @ObservedObject var viewModel: SearchViewModel
     var coordinator: AppCoordinator
 
     var body: some View {
         NavigationStack {
             VStack {
-                SearchTextField(text: $viewModel.searchText, onSearch: {
-                    viewModel.searchWord(viewModel.searchText)
-                })
-                
-                List(viewModel.wordList, id: \.word) { word in
+                List(getCurrentWordList(), id: \.word) { word in
                     Button(action: {
-                        coordinator.showWordDetails(for: word) 
+                        coordinator.showWordDetails(for: word)
                     }) {
                         HStack {
                             Text(word.word.capitalized)
                                 .font(.headline)
                                 .foregroundColor(.primary)
-
                             Spacer()
-
-                            if viewModel.cacheManager.isWordCached(word) {
-                                Image(systemName: "clock.arrow.circlepath") // ✅ Cached icon
-                                    .foregroundColor(.gray)
-                            }
                         }
                         .padding()
                     }
@@ -43,5 +33,15 @@ struct SearchView: View {
                     .opacity(viewModel.errorMessage == nil ? 0 : 1)
             )
         }
+        .searchable(text: $viewModel.searchText, prompt: "Search for a word")
+        .onSubmit(of: .search) {
+            viewModel.searchWord(viewModel.searchText) 
+        }
+
+    }
+
+    /// **Get the appropriate list based on search state**
+    private func getCurrentWordList() -> [DictionaryWord] {
+        return viewModel.searchText.isEmpty ? viewModel.wordList : viewModel.apiResults
     }
 }

@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B29511D2D5FD04A004C4820 /* CachedWord+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B29511B2D5FD04A004C4820 /* CachedWord+CoreDataClass.swift */; };
-		3B29511E2D5FD04A004C4820 /* CachedWord+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B29511C2D5FD04A004C4820 /* CachedWord+CoreDataProperties.swift */; };
 		3B97BB932D5F797500072B30 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 3B97BB922D5F797500072B30 /* CombineMoya */; };
 		3B97BB952D5F797500072B30 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 3B97BB942D5F797500072B30 /* Moya */; };
+		3BC56F042D60CC0500DCEF62 /* CachedWord+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC56F032D60CC0500DCEF62 /* CachedWord+CoreDataProperties.swift */; };
+		3BC56F052D60CC0500DCEF62 /* CachedWord+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC56F022D60CC0500DCEF62 /* CachedWord+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,11 +31,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3B29511B2D5FD04A004C4820 /* CachedWord+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CachedWord+CoreDataClass.swift"; path = "WordDefinitions/CoreData/CachedWord+CoreDataClass.swift"; sourceTree = "<group>"; };
-		3B29511C2D5FD04A004C4820 /* CachedWord+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CachedWord+CoreDataProperties.swift"; path = "WordDefinitions/CoreData/CachedWord+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3B97BB642D5F789800072B30 /* WordDefinitions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordDefinitions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B97BB742D5F789900072B30 /* WordDefinitionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WordDefinitionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B97BB7E2D5F789900072B30 /* WordDefinitionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WordDefinitionsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BC56F022D60CC0500DCEF62 /* CachedWord+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CachedWord+CoreDataClass.swift"; path = "WordDefinitions/CoreData/CachedWord+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3BC56F032D60CC0500DCEF62 /* CachedWord+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CachedWord+CoreDataProperties.swift"; path = "WordDefinitions/CoreData/CachedWord+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -47,11 +47,6 @@
 		3B97BB772D5F789900072B30 /* WordDefinitionsTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = WordDefinitionsTests;
-			sourceTree = "<group>";
-		};
-		3B97BB812D5F789900072B30 /* WordDefinitionsUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = WordDefinitionsUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -86,11 +81,10 @@
 		3B97BB5B2D5F789800072B30 = {
 			isa = PBXGroup;
 			children = (
-				3B29511B2D5FD04A004C4820 /* CachedWord+CoreDataClass.swift */,
-				3B29511C2D5FD04A004C4820 /* CachedWord+CoreDataProperties.swift */,
+				3BC56F022D60CC0500DCEF62 /* CachedWord+CoreDataClass.swift */,
+				3BC56F032D60CC0500DCEF62 /* CachedWord+CoreDataProperties.swift */,
 				3B97BB662D5F789800072B30 /* WordDefinitions */,
 				3B97BB772D5F789900072B30 /* WordDefinitionsTests */,
-				3B97BB812D5F789900072B30 /* WordDefinitionsUITests */,
 				3B97BB652D5F789800072B30 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -167,9 +161,6 @@
 			);
 			dependencies = (
 				3B97BB802D5F789900072B30 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				3B97BB812D5F789900072B30 /* WordDefinitionsUITests */,
 			);
 			name = WordDefinitionsUITests;
 			packageProductDependencies = (
@@ -254,8 +245,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B29511D2D5FD04A004C4820 /* CachedWord+CoreDataClass.swift in Sources */,
-				3B29511E2D5FD04A004C4820 /* CachedWord+CoreDataProperties.swift in Sources */,
+				3BC56F042D60CC0500DCEF62 /* CachedWord+CoreDataProperties.swift in Sources */,
+				3BC56F052D60CC0500DCEF62 /* CachedWord+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
