@@ -9,8 +9,8 @@ import Foundation
 
 struct DictionaryWord: Codable {
     let word: String
-    let phonetics: [Phonetic]
-    let meanings: [Meaning]
+    let phonetics: [Phonetic]?
+    let meanings: [Meaning]?
     let license: License?
     let sourceUrls: [String]?
 }

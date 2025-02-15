@@ -27,9 +27,8 @@ class CoreDataManager {
     func saveWord(_ wordDefinition: DictionaryWord) {
         let entity = CachedWord(context: context)
         entity.word = wordDefinition.word
-        entity.phonetics = wordDefinition.phonetics.first?.text ?? ""
-        entity.definition = wordDefinition.meanings.first?.definitions.first?.definition ?? ""
-
+        entity.phonetics = wordDefinition.phonetics?.first?.text ?? ""
+        entity.definition = wordDefinition.meanings?.first?.definitions.first?.definition ?? ""
         do {
             try context.save()
         } catch {
@@ -54,6 +53,19 @@ class CoreDataManager {
         } catch {
             print("Failed to fetch cached words: \(error.localizedDescription)")
             return []
+        }
+    }
+    
+    func isWordCached(_ word: DictionaryWord) -> Bool {
+        let request: NSFetchRequest<CachedWord> = CachedWord.fetchRequest()
+        request.predicate = NSPredicate(format: "word == %@", word.word)
+
+        do {
+            let results = try context.fetch(request)
+            return !results.isEmpty
+        } catch {
+            print("Error checking cached word: \(error.localizedDescription)")
+            return false
         }
     }
 }
