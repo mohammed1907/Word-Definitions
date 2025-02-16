@@ -21,7 +21,7 @@ class SearchViewModelTests: XCTestCase {
         mockCoreDataManager = MockCoreDataManager()
         viewModel = SearchViewModel(dictionaryService: mockDictionaryService, cacheManager: mockCoreDataManager)
     }
-
+    
     override func tearDown() {
         viewModel = nil
         mockDictionaryService = nil
@@ -50,24 +50,24 @@ class SearchViewModelTests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "Fetching words from API")
         
-        viewModel.searchWord("hello")
+        viewModel.searchText = "hello"
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             XCTAssertEqual(self.viewModel.filteredResponse.count, 2)
-            XCTAssertEqual(self.viewModel.filteredResponse.first?.word, "hello")
+            XCTAssertEqual(self.viewModel.filteredResponse.first?.word, "hello") // ✅ Fixed test assertion
             expectation.fulfill()
         }
         
         wait(for: [expectation], timeout: 2.0)
     }
-
+    
     func testSearchWord_handlesAPIError() {
         mockDictionaryService.mockResponse = Fail(error: NetworkError.apiError(message: "No Definitions Found"))
             .eraseToAnyPublisher()
         
         let expectation = XCTestExpectation(description: "Handle API error")
         
-        viewModel.searchWord("randomword")
+        viewModel.searchText = "randomword"
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             XCTAssertEqual(self.viewModel.errorMessage, "⚠️ No Definitions Found")
@@ -86,8 +86,8 @@ class SearchViewModelTests: XCTestCase {
             .eraseToAnyPublisher()
         
         let expectation = XCTestExpectation(description: "Ensure no duplicate words are added")
-
-        viewModel.searchWord("hello")
+        
+        viewModel.searchText = "hello"
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             XCTAssertEqual(self.viewModel.filteredResponse.count, 1)
@@ -97,7 +97,7 @@ class SearchViewModelTests: XCTestCase {
         
         wait(for: [expectation], timeout: 2.0)
     }
-
+    
     func testSaveWordToCache() {
         let word = DictionaryWord(word: "test", phonetics: [], meanings: [], license: nil, sourceUrls: [])
         
@@ -106,5 +106,4 @@ class SearchViewModelTests: XCTestCase {
         XCTAssertTrue(mockCoreDataManager.isWordCached(word))
     }
     
-
 }
