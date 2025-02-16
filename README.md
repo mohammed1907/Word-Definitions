@@ -72,22 +72,12 @@ The project follows **MVVM-C (Model-View-ViewModel-Coordinator)**:
 - **Unit Testing** – XCTest framework for ViewModels & Services
 
 ---
-## 📡 API Integration
-The app fetches word definitions using an external **Dictionary API** through Moya:
-- **GET /word/{word}** → Fetch word details
-- Handles **error responses (404, 500, etc.)** gracefully
-
----
 ## 🔍 How to Run
 1. Clone the repository
 2. Open `WordDefinitions.xcodeproj`
 3. Ensure **Xcode 15+** is installed
 4. Run `⌘ + R` to build and run the app on the simulator
 
-
----
-## 🏆 Credits
-Developed by **Mohamed** as part of a coding challenge.
 
 ---
 ## 📜 License
