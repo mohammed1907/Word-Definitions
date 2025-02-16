@@ -1,5 +1,5 @@
 # 📖 WordDefinitions
-
+[![iOS CI](https://github.com/mohammed1907/Word-Definitions/actions/workflows/ci.yml/badge.svg)](https://github.com/mohammed1907/Word-Definitions/actions/workflows/ci.yml)
 ## 📌 Overview
 WordDefinitions is an iOS application built using **SwiftUI** and **MVVM-C (Model-View-ViewModel-Coordinator)** architecture. The app fetches word definitions from an API, caches the searched words using **Core Data**, and ensures smooth offline access.
 
