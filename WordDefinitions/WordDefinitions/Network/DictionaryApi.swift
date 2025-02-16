@@ -37,6 +37,6 @@ extension DictionaryAPI: TargetType {
     }
     
     var validationType: ValidationType {
-        return .successCodes
+        return .none
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 struct APIErrorResponse: Codable, Error {
-    let title: String
-    let message: String
-    let resolution: String
+    let title: String?
+    let message: String?
+    let resolution: String?
 }

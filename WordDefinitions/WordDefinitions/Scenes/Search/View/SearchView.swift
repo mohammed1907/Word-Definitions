@@ -28,10 +28,10 @@ struct SearchView: View {
                 }
             }
             .navigationTitle("Dictionary")
-//            .overlay(
-//                ToastView(message: viewModel.errorMessage ?? "")
-//                    .opacity(viewModel.errorMessage == nil ? 0 : 1)
-//            )
+            .overlay(
+                ToastView(message: viewModel.errorMessage ?? "")
+                    .opacity(viewModel.errorMessage == nil ? 0 : 1)
+            )
         }
         .searchable(text: $viewModel.searchText, prompt: "Search for a word")
         .onSubmit(of: .search) {
