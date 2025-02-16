@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct WordDefinitionsApp: App {
+    init() {
+          ArrayTransformer.register() 
+      }
     var body: some Scene {
         WindowGroup {
-            SplashScreenView() 
+            SplashScreenView()
         }
     }
 }

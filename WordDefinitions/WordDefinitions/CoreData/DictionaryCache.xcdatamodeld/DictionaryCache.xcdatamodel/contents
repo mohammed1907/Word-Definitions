@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24C101" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="CachedWord" representedClassName="CachedWord" syncable="YES">
-        <attribute name="definition" optional="YES" attributeType="Transformable"/>
-        <attribute name="examples" optional="YES" attributeType="Transformable"/>
+        <attribute name="definition" optional="YES" attributeType="Transformable" valueTransformerName="ArrayTransformer"/>
+        <attribute name="examples" optional="YES" attributeType="Transformable" valueTransformerName="ArrayTransformer"/>
         <attribute name="partOfSpeech" optional="YES" attributeType="String"/>
         <attribute name="word" optional="YES" attributeType="String"/>
     </entity>

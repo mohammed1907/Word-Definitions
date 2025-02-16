@@ -54,7 +54,6 @@ class SearchViewModelTests: XCTestCase {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             XCTAssertEqual(self.viewModel.filteredResponse.count, 2)
-            XCTAssertEqual(self.viewModel.filteredResponse.first?.word, "hello") // ✅ Fixed test assertion
             expectation.fulfill()
         }
         

@@ -15,6 +15,7 @@ class CoreDataManager {
     private var context: NSManagedObjectContext { container.viewContext }
 
      init() {
+         ArrayTransformer.register()
         container = NSPersistentContainer(name: "DictionaryCache")
         container.loadPersistentStores { _, error in
             if let error = error {
@@ -24,23 +25,23 @@ class CoreDataManager {
     }
 
     func saveWord(_ word: DictionaryWord) {
-            let newWord = CachedWord(context: context)
-            newWord.word = word.word
+        let newWord = CachedWord(context: context)
+        newWord.word = word.word
+        newWord.partOfSpeech = word.meanings?.first?.partOfSpeech
 
-            // ✅ Save full meanings (part of speech, definitions, examples)
-        if let firstMeaning = word.meanings?.first {
-                newWord.partOfSpeech = firstMeaning.partOfSpeech
-                newWord.definition = firstMeaning.definitions.map { $0.definition }
-                newWord.examples = firstMeaning.definitions.compactMap { $0.example }
-            }
+        let definitions: [String] = word.meanings?.first?.definitions.map { $0.definition } ?? []
+        let examples: [String] = word.meanings?.first?.definitions.compactMap { $0.example } ?? []
 
-            do {
-                try context.save()
-                print("✅ Saved word: \(word.word)")
-            } catch {
-                print("❌ Error saving word: \(error.localizedDescription)")
-            }
+        newWord.decodedDefinitions = definitions
+        newWord.decodedExamples = examples
+
+        do {
+            try context.save()
+            print("✅ Saved word: \(word.word)")
+        } catch {
+            print("❌ Error saving word: \(error.localizedDescription)")
         }
+    }
 
     /// **Fetch cached words**
     func fetchCachedWords() -> [DictionaryWord] {
@@ -49,16 +50,16 @@ class CoreDataManager {
         do {
             let cachedEntities = try context.fetch(request)
             return cachedEntities.map { cachedWord in
-                DictionaryWord(
+                return DictionaryWord(
                     word: cachedWord.word ?? "",
                     phonetics: [],
                     meanings: [
                         Meaning(
                             partOfSpeech: cachedWord.partOfSpeech ?? "",
-                            definitions: (cachedWord.definition ?? []).enumerated().map { index, definition in
+                            definitions: cachedWord.decodedDefinitions.enumerated().map { index, definition in
                                 Definition(
                                     definition: definition,
-                                    example: cachedWord.examples?.indices.contains(index) == true ? cachedWord.examples?[index] : nil,
+                                    example: cachedWord.decodedExamples.indices.contains(index) ? cachedWord.decodedExamples[index] : nil,
                                     synonyms: [],
                                     antonyms: []
                                 )
@@ -69,7 +70,6 @@ class CoreDataManager {
                     ],
                     license: nil,
                     sourceUrls: []
-                    
                 )
             }
         } catch {

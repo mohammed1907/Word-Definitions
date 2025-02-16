@@ -18,7 +18,7 @@ struct ToastView: View {
                 .foregroundColor(.white)
                 .clipShape(Capsule())
                 .transition(.slide)
-                .animation(.easeInOut(duration: 0.3))
+                .animation(.easeInOut(duration: 0.3), value: message.isEmpty)
                 .padding(.top, 20)
         }
     }
