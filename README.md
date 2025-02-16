@@ -75,7 +75,7 @@ The project follows **MVVM-C (Model-View-ViewModel-Coordinator)**:
 ## 🔍 How to Run
 1. Clone the repository
 2. Open `WordDefinitions.xcodeproj`
-3. Ensure **Xcode 15+** is installed
+3. Ensure **Xcode 16+** is installed
 4. Run `⌘ + R` to build and run the app on the simulator
 
 
