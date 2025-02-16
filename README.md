@@ -84,17 +84,6 @@ The app fetches word definitions using an external **Dictionary API** through Mo
 3. Ensure **Xcode 15+** is installed
 4. Run `⌘ + R` to build and run the app on the simulator
 
----
-## 🧪 Unit Tests
-The app includes **unit tests** for ViewModels and services under the `Tests` directory:
-- `SearchViewModelTests.swift`
-- `MockDictionaryService.swift`
-- `MockCoreDataManager.swift`
-
-Run tests using:
-```
-⌘ + U
-```
 
 ---
 ## 🏆 Credits
