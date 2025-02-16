@@ -25,7 +25,7 @@ class ArrayTransformer: ValueTransformer {
     override func reverseTransformedValue(_ value: Any?) -> Any? {
         guard let data = value as? Data else { return nil }
         return try? NSKeyedUnarchiver.unarchivedObject(
-            ofClasses: [NSArray.self, NSString.self], // ✅ Explicitly allow NSString
+            ofClasses: [NSArray.self, NSString.self], 
             from: data
         ) as? [String]
     }

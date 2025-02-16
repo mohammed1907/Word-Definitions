@@ -23,7 +23,7 @@ class CoreDataManager {
             }
         }
     }
-
+ //MARK: save word for offline access
     func saveWord(_ word: DictionaryWord) {
         let newWord = CachedWord(context: context)
         newWord.word = word.word
@@ -43,7 +43,7 @@ class CoreDataManager {
         }
     }
 
-    /// **Fetch cached words**
+    //MARK: fetch words from cache
     func fetchCachedWords() -> [DictionaryWord] {
         let request: NSFetchRequest<CachedWord> = CachedWord.fetchRequest()
 
@@ -73,11 +73,11 @@ class CoreDataManager {
                 )
             }
         } catch {
-            print("❌ Error fetching cached words: \(error.localizedDescription)")
+            print("Error fetching cached words: \(error.localizedDescription)")
             return []
         }
     }
-    
+    //MARK: Used for ignore duplication
     func isWordCached(_ word: DictionaryWord) -> Bool {
         let request: NSFetchRequest<CachedWord> = CachedWord.fetchRequest()
         request.predicate = NSPredicate(format: "word == %@", word.word)
