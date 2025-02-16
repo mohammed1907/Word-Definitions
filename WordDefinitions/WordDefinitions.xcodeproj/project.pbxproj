@@ -19,19 +19,11 @@
 			remoteGlobalIDString = 3B97BB632D5F789800072B30;
 			remoteInfo = WordDefinitions;
 		};
-		3B97BB7F2D5F789900072B30 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3B97BB5C2D5F789800072B30 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3B97BB632D5F789800072B30;
-			remoteInfo = WordDefinitions;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3B97BB642D5F789800072B30 /* WordDefinitions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordDefinitions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B97BB742D5F789900072B30 /* WordDefinitionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WordDefinitionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B97BB7E2D5F789900072B30 /* WordDefinitionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WordDefinitionsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -64,13 +56,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3B97BB7B2D5F789900072B30 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -88,7 +73,6 @@
 			children = (
 				3B97BB642D5F789800072B30 /* WordDefinitions.app */,
 				3B97BB742D5F789900072B30 /* WordDefinitionsTests.xctest */,
-				3B97BB7E2D5F789900072B30 /* WordDefinitionsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,26 +127,6 @@
 			productReference = 3B97BB742D5F789900072B30 /* WordDefinitionsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		3B97BB7D2D5F789900072B30 /* WordDefinitionsUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3B97BB8E2D5F789900072B30 /* Build configuration list for PBXNativeTarget "WordDefinitionsUITests" */;
-			buildPhases = (
-				3B97BB7A2D5F789900072B30 /* Sources */,
-				3B97BB7B2D5F789900072B30 /* Frameworks */,
-				3B97BB7C2D5F789900072B30 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3B97BB802D5F789900072B30 /* PBXTargetDependency */,
-			);
-			name = WordDefinitionsUITests;
-			packageProductDependencies = (
-			);
-			productName = WordDefinitionsUITests;
-			productReference = 3B97BB7E2D5F789900072B30 /* WordDefinitionsUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -177,10 +141,6 @@
 						CreatedOnToolsVersion = 16.2;
 					};
 					3B97BB732D5F789900072B30 = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 3B97BB632D5F789800072B30;
-					};
-					3B97BB7D2D5F789900072B30 = {
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = 3B97BB632D5F789800072B30;
 					};
@@ -205,7 +165,6 @@
 			targets = (
 				3B97BB632D5F789800072B30 /* WordDefinitions */,
 				3B97BB732D5F789900072B30 /* WordDefinitionsTests */,
-				3B97BB7D2D5F789900072B30 /* WordDefinitionsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -219,13 +178,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3B97BB722D5F789900072B30 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3B97BB7C2D5F789900072B30 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -249,13 +201,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3B97BB7A2D5F789900072B30 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -263,11 +208,6 @@
 			isa = PBXTargetDependency;
 			target = 3B97BB632D5F789800072B30 /* WordDefinitions */;
 			targetProxy = 3B97BB752D5F789900072B30 /* PBXContainerItemProxy */;
-		};
-		3B97BB802D5F789900072B30 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3B97BB632D5F789800072B30 /* WordDefinitions */;
-			targetProxy = 3B97BB7F2D5F789900072B30 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -487,40 +427,6 @@
 			};
 			name = Release;
 		};
-		3B97BB8F2D5F789900072B30 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = RH8P82875M;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "come.-BuildingLink.WordDefinitionsUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = WordDefinitions;
-			};
-			name = Debug;
-		};
-		3B97BB902D5F789900072B30 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = RH8P82875M;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "come.-BuildingLink.WordDefinitionsUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = WordDefinitions;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -547,15 +453,6 @@
 			buildConfigurations = (
 				3B97BB8C2D5F789900072B30 /* Debug */,
 				3B97BB8D2D5F789900072B30 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3B97BB8E2D5F789900072B30 /* Build configuration list for PBXNativeTarget "WordDefinitionsUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3B97BB8F2D5F789900072B30 /* Debug */,
-				3B97BB902D5F789900072B30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

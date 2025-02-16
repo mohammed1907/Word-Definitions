@@ -18,8 +18,8 @@ class SearchViewModel: ObservableObject {
     
     private var cancellable = Set<AnyCancellable>()
     
-    init(dictionaryService: DictionaryServiceProtocol = DictionaryService(),
-         cacheManager: CoreDataManager = CoreDataManager.shared) {
+    init(dictionaryService: DictionaryServiceProtocol,
+         cacheManager: CoreDataManager) {
         self.dictionaryService = dictionaryService
         self.cacheManager = cacheManager
         loadCachedWords()

@@ -20,7 +20,7 @@ class AppCoordinator: Coordinator {
     }
     
     func showSearchScreen() {
-        let viewModel = SearchViewModel()
+        let viewModel = SearchViewModel(dictionaryService: DictionaryService(), cacheManager: CoreDataManager.shared)
         let searchView = SearchView(viewModel: viewModel, coordinator: self)
         let hostingController = UIHostingController(rootView: searchView)
         navigationController.setViewControllers([], animated: false)

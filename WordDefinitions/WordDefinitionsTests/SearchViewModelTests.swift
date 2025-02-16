@@ -23,6 +23,7 @@ class SearchViewModelTests: XCTestCase {
     }
     
     override func tearDown() {
+        print("Cleaning up test...")
         viewModel = nil
         mockDictionaryService = nil
         mockCoreDataManager = nil
