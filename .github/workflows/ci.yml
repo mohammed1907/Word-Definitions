@@ -1,0 +1,33 @@
+name: iOS CI
+
+on:
+  push:
+    branches:
+      - main  
+  pull_request:
+    branches:
+      - main  
+
+jobs:
+  test:
+    name: Run Unit Tests
+    runs-on: macos-latest
+
+    steps:
+      - name: 🔄 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🔧 Set up Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+
+      - name: 📦 Install Dependencies (Optional)
+        run: |
+          brew install swiftlint # Install SwiftLint if needed
+
+      - name: 🏗️ Build and Test Project
+        run: |
+          xcodebuild test \
+          -project WordDefinitions.xcodeproj \
+          -scheme WordDefinitions \
+          -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+          | xcpretty --color --test
